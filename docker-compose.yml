@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  # Symfony app
+  back:
+    build:
+      context: ./back
+    working_dir: /var/www/html/symfony
+    volumes:
+      - ./back:/var/www/html/symfony
+      - ./configs/back:/etc/apache2/sites-enabled
+    networks:
+      net:
+        ipv4_address: 192.1.9.2
+
+  # React app
+  front:
+    build:
+      context: ./front
+    working_dir: /usr/share/nginx/html
+    volumes:
+      - ./front:/var/www/html/symfony
+      - ./configs/front:/etc/apache2/sites-enabled
+    networks:
+      net:
+        ipv4_address: 192.1.9.3
+
+  # DataBase
+  database:
+    image: mongo:4.4.2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: dev
+    volumes:
+      - database_volume:/data/db
+    networks:
+      net:
+        ipv4_address: 192.1.9.4
+
+networks:
+  net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.1.9.0/29
+
+volumes:
+  database_volume:
