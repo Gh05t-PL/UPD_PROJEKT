@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  # Symfony app
+  back:
+    image: wiktorwz/notes_back:latest
+    working_dir: /var/www/html/symfony
+    ports:
+      - 81:80
+    networks:
+      net:
+        ipv4_address: 192.1.9.2
+
+  # React app
+  front:
+    image: wiktorwz/notes_front:latest
+    working_dir: /usr/share/nginx/html
+    ports:
+      - 80:80
+    networks:
+      net:
+        ipv4_address: 192.1.9.3
+
+  # DataBase
+  database:
+    image: mongo:4.4.2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: dev
+    volumes:
+      - database_volume:/data/db
+    networks:
+      net:
+        ipv4_address: 192.1.9.4
+
+networks:
+  net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.1.9.0/29
+
+volumes:
+  database_volume:

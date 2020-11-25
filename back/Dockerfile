@@ -23,5 +23,6 @@ RUN a2enmod headers
 
 WORKDIR /var/www/html/symfony
 COPY . .
-COPY ./apacheCFG /etc/apache2/sites-enabled
-RUN composer install && php bin/console doctrine:mongodb:schema:create
+COPY ./apacheCFG c
+RUN composer install
+RUN rm /etc/apache2/sites-enabled/000-default.conf
