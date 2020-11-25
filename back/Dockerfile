@@ -23,4 +23,5 @@ RUN a2enmod headers
 
 WORKDIR /var/www/html/symfony
 COPY . .
-RUN composer install
+COPY ./apacheCFG /etc/apache2/sites-enabled
+RUN composer install && php bin/console doctrine:mongodb:schema:create
