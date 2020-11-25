@@ -9,6 +9,8 @@ services:
     volumes:
       - ./back:/var/www/html/symfony
       - ./configs/back:/etc/apache2/sites-enabled
+    ports:
+      - 80:80
     networks:
       net:
         ipv4_address: 192.1.9.2
@@ -21,6 +23,8 @@ services:
     volumes:
       - ./front:/var/www/html/symfony
       - ./configs/front:/etc/apache2/sites-enabled
+    ports:
+      - 81:80
     networks:
       net:
         ipv4_address: 192.1.9.3
