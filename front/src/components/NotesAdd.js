@@ -21,7 +21,7 @@ const NotesAdd = () => {
 
   const submit = () => {
     fetch(
-      `http://192.1.9.2/notes`,
+      `${window.SERVER}/notes`,
       {
         method: 'POST',
         body: JSON.stringify({

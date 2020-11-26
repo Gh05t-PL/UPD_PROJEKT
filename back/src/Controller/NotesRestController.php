@@ -83,6 +83,7 @@ class NotesRestController extends AbstractController
      */
     public function fetch(string $id): Response
     {
+
         $note = $this->notesService->fetch(
             $id
         );
@@ -102,7 +103,7 @@ class NotesRestController extends AbstractController
     public function fetchAll(): Response
     {
         $notes = $this->notesService->fetchAll();
-
+//dd($_ENV,$_SERVER);
         return $this->json([
             'success' => true,
             'data' => $notes,

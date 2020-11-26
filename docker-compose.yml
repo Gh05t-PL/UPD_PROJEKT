@@ -6,6 +6,9 @@ services:
     build:
       context: ./back
     working_dir: /var/www/html/symfony
+    volumes:
+    - ./back/config:/var/www/html/symfony/config
+    - ./back/src:/var/www/html/symfony/src
     ports:
       - 80:80
     networks:

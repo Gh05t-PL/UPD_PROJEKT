@@ -23,6 +23,6 @@ RUN a2enmod headers
 
 WORKDIR /var/www/html/symfony
 COPY . .
-COPY ./apacheCFG c
+COPY ./apacheCFG /etc/apache2/sites-enabled
 RUN composer install
 RUN rm /etc/apache2/sites-enabled/000-default.conf

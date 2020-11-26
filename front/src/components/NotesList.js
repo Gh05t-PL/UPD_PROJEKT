@@ -24,12 +24,12 @@ const NotesList = () => {
   const [notes, setNotes] = useState([]);
 
   const deleteNote = (id) => {
-    fetch(`http://192.1.9.2/notes/${id}`, {method: 'DELETE'})
+    fetch(`${window.SERVER}/notes/${id}`, {method: 'DELETE'})
     setNotes(notes.filter(value => value.id !== id))
   }
 
   useEffect(() => {
-    fetch("http://192.1.9.2/notes")
+    fetch(`${window.SERVER}/notes`)
       .then(response => response.json())
       .then(response => {
         setNotes(response.data)
@@ -47,7 +47,7 @@ const NotesList = () => {
                 <Card.Text>
                   Created at {item.createdAt}
                 </Card.Text>
-                <Link to={`/notes/${item.id}`}>
+                <Link to={`/notes/edit/${item.id}`}>
                   <Button variant="primary">Edit</Button>
                 </Link>
 

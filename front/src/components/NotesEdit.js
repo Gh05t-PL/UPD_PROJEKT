@@ -23,7 +23,7 @@ const NotesEdit = () => {
 
   const submit = () => {
     fetch(
-      `http://192.1.9.2/notes/${id}`,
+      `${window.SERVER}/notes/${id}`,
       {
         method: 'PUT',
         body: JSON.stringify({
@@ -38,7 +38,7 @@ const NotesEdit = () => {
   }
 
   useEffect(() => {
-    fetch(`http://192.1.9.2/notes/${id}`)
+    fetch(`${window.SERVER}/notes/${id}`)
       .then(response => response.json())
       .then(response => {
         setTitle(response.data.title)
